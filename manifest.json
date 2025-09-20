@@ -1,8 +1,8 @@
 {
-  "name": "Groove - Premium Music Player",
+  "name": "Groove - Music Player",
   "short_name": "Groove",
   "description": "A premium music player PWA with background playback and modern UI",
-  "start_url": "/",
+  "start_url": "/index.html",
   "display": "standalone",
   "theme_color": "#1f2937",
   "background_color": "#0f172a",
@@ -65,4 +65,5 @@
       ]
     }
   }
+
 }
