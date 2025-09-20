@@ -1,0 +1,60 @@
+{
+  "songs": [
+    {
+      "id": "1",
+      "title": "demo",
+      "artist": "Bensound",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/po6sd98j29vm0c5mk8jxc/Fang-yuan.mp3?rlkey=8i1ymxkqn08psizjlvqs3i308",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Breeze"
+    },
+    {
+      "id": "2",
+      "title": "Summer",
+      "artist": "Bensound",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/po6sd98j29vm0c5mk8jxc/Fang-yuan.mp3?rlkey=8i1ymxkqn08psizjlvqs3i308&raw=1",
+      "coverArt": "https://placehold.co/100x100/fca5a5/ffffff?text=Summer"
+    },
+    {
+      "id": "3",
+      "title": "Jazzy Frenchy",
+      "artist": "Bensound",
+      "audioSrc": "https://docs.google.com/uc?export=download&id=1-W-6mQQ4JzGvI2_f8p8pXwLUyLOEVqby",
+      "coverArt": "https://placehold.co/100x100/94a3b8/ffffff?text=Jazzy"
+    },
+    {
+      "id": "4",
+      "title": "Sunny",
+      "artist": "Bensound",
+      "audioSrc": "https://www.bensound.com/bensound-music/bensound-sunny.mp3",
+      "coverArt": "https://placehold.co/100x100/d1d5db/ffffff?text=Sunny"
+    },
+    {
+      "id": "5",
+      "title": "Creative Minds",
+      "artist": "Bensound",
+      "audioSrc": "https://www.bensound.com/bensound-music/bensound-creativeminds.mp3",
+      "coverArt": "https://placehold.co/100x100/a78bfa/ffffff?text=Creative"
+    },
+    {
+      "id": "6",
+      "title": "The Lounge",
+      "artist": "Bensound",
+      "audioSrc": "https://www.bensound.com/bensound-music/bensound-thelounge.mp3",
+      "coverArt": "https://placehold.co/100x100/38bdf8/ffffff?text=Lounge"
+    },
+    {
+      "id": "7",
+      "title": "Ukulele",
+      "artist": "Bensound",
+      "audioSrc": "https://www.bensound.com/bensound-music/bensound-ukulele.mp3",
+      "coverArt": "https://placehold.co/100x100/f59e0b/ffffff?text=Ukulele"
+    },
+    {
+      "id": "8",
+      "title": "Happiness",
+      "artist": "Bensound",
+      "audioSrc": "https://www.bensound.com/bensound-music/bensound-happiness.mp3",
+      "coverArt": "https://placehold.co/100x100/10b981/ffffff?text=Happy"
+    }
+  ]
+}

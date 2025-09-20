@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Groove - Premium Music Player</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1f2937" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Groove Music" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Icons -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="icons/icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="icons/icon-512x512.png"
+    />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+
+    <!-- External Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="max-w-sm mx-auto min-h-screen flex flex-col relative">
+      <!-- Loading Screen -->
+      <div
+        id="loading-screen"
+        class="fixed inset-0 glass-effect z-50 flex flex-col items-center justify-center"
+      >
+        <div class="loading-spinner mb-6"></div>
+        <h2 class="text-2xl font-bold gradient-text mb-2">Groove</h2>
+        <p class="text-gray-400 font-medium">Loading your music...</p>
+      </div>
+
+      <!-- Header -->
+      <header class="safe-area-top glass-effect sticky top-0 z-40 px-6 py-3">
+        <div class="flex items-center justify-between h-12">
+          <!-- Default Header Content (logo + search button) -->
+          <div
+            id="header-default"
+            class="flex items-center justify-between w-full transition-all duration-300"
+          >
+            <h1 class="text-2xl font-bold gradient-text tracking-tight">
+              Groove
+            </h1>
+            <button
+              id="search-toggle"
+              class="w-10 h-10 rounded-full glass-effect flex items-center justify-center text-gray-400 hover:text-white transition-colors flex-shrink-0"
+            >
+              <i class="fas fa-search text-lg"></i>
+            </button>
+          </div>
+
+          <!-- Search Bar (full width, hidden by default) -->
+          <div
+            id="search-bar"
+            class="absolute inset-0 px-6 py-3 opacity-0 transform translate-y-2 transition-all duration-300 pointer-events-none"
+          >
+            <div class="relative h-12 flex items-center">
+              <div class="relative flex-1">
+                <i
+                  class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                ></i>
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Search songs, artists..."
+                  class="w-full pl-12 pr-12 py-2.5 glass-effect rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition-all text-sm"
+                />
+                <button
+                  id="search-close"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                >
+                  <i class="fas fa-times text-sm"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-1 px-6 pb-32 overflow-hidden">
+        <!-- All Songs View -->
+        <section id="all-songs-view" class="h-full">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold text-white">Your Music</h2>
+            <span
+              id="songs-count"
+              class="text-sm text-gray-400 font-medium"
+            ></span>
+          </div>
+          <div id="songs-list" class="space-y-3"></div>
+        </section>
+
+        <!-- Liked Songs View -->
+        <section id="liked-songs-view" class="h-full hidden">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold text-white">Liked Songs</h2>
+            <span
+              id="liked-count"
+              class="text-sm text-gray-400 font-medium"
+            ></span>
+          </div>
+          <div id="liked-songs-list" class="space-y-3"></div>
+        </section>
+
+        <!-- Playlists View -->
+        <section id="playlists-view" class="h-full hidden">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold text-white">Playlists</h2>
+            <button
+              id="add-playlist-btn"
+              class="px-4 py-2 glass-effect rounded-xl text-red-400 hover:text-red-300 font-medium transition-colors"
+            >
+              <i class="fas fa-plus mr-2"></i>Create
+            </button>
+          </div>
+          <div id="playlists-list" class="space-y-3"></div>
+        </section>
+
+        <!-- Playlist Detail View -->
+        <section id="playlist-detail-view" class="h-full hidden">
+          <div class="flex items-center justify-between mb-6">
+            <button
+              id="back-to-playlists-btn"
+              class="w-10 h-10 rounded-full glass-effect flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+            >
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2
+              id="playlist-detail-title"
+              class="text-xl font-bold text-white flex-1 text-center truncate mx-4"
+            ></h2>
+            <div class="w-10"></div>
+          </div>
+          <div id="playlist-songs-list" class="space-y-3"></div>
+        </section>
+      </main>
+
+      <!-- Mini Player -->
+      <div
+        id="mini-player"
+        class="fixed bottom-20 left-4 right-4 glass-effect rounded-2xl p-4 transform translate-y-full opacity-0 transition-all duration-500 z-30"
+      >
+        <div class="flex items-center space-x-4">
+          <div class="relative">
+            <img
+              id="mini-player-art"
+              src=""
+              alt="Album Art"
+              class="w-12 h-12 rounded-xl object-cover shadow-lg"
+            />
+            <div
+              id="mini-player-visualizer"
+              class="music-visualizer absolute -top-1 -right-1 opacity-0"
+            >
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p
+              id="mini-player-title"
+              class="font-semibold text-white truncate text-sm"
+            ></p>
+            <p
+              id="mini-player-artist"
+              class="text-gray-400 truncate text-xs"
+            ></p>
+            <div class="mt-1">
+              <input
+                type="range"
+                id="mini-progress"
+                class="progress-slider mini-progress-slider"
+                value="0"
+              />
+            </div>
+          </div>
+          <button
+            id="mini-play-btn"
+            class="w-12 h-12 rounded-full bg-gradient-to-r from-red-500 to-red-600 text-white flex items-center justify-center ripple animate-glow"
+          >
+            <i class="fas fa-play text-lg ml-0.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Full Player Modal -->
+      <div
+        id="player-modal"
+        class="fixed inset-0 bg-gradient-to-br from-gray-900/95 to-slate-900/95 backdrop-blur-3xl z-50 hidden"
+      >
+        <div
+          class="h-full flex flex-col justify-between p-6 safe-area-top safe-area-bottom"
+        >
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between mb-8">
+            <button
+              id="player-close"
+              class="w-10 h-10 rounded-full glass-effect flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+            >
+              <i class="fas fa-chevron-down text-lg"></i>
+            </button>
+            <p class="text-gray-400 font-medium">Now Playing</p>
+            <div class="w-10"></div>
+          </div>
+
+          <!-- Album Art -->
+          <div class="flex-1 flex items-center justify-center">
+            <div class="relative">
+              <img
+                id="player-art"
+                src=""
+                alt="Album Art"
+                class="w-80 h-80 rounded-3xl object-cover shadow-2xl animate-float"
+              />
+              <div
+                class="absolute inset-0 rounded-3xl bg-gradient-to-t from-black/20 to-transparent"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Song Info -->
+          <div class="text-center mb-8">
+            <h1
+              id="player-title"
+              class="text-2xl font-bold text-white mb-2 truncate"
+            ></h1>
+            <p id="player-artist" class="text-lg text-gray-400 truncate"></p>
+          </div>
+
+          <!-- Progress -->
+          <div class="mb-8">
+            <input
+              type="range"
+              id="player-progress"
+              class="progress-slider mb-3"
+              value="0"
+            />
+            <div class="flex justify-between text-sm text-gray-400 font-medium">
+              <span id="current-time">0:00</span>
+              <span id="total-time">0:00</span>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="flex items-center justify-between mb-8">
+            <button
+              id="like-btn"
+              class="w-12 h-12 flex items-center justify-center text-2xl transition-all duration-300"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="flex items-center space-x-6">
+              <button
+                id="prev-btn"
+                class="w-14 h-14 rounded-full glass-effect flex items-center justify-center text-gray-300 hover:text-white transition-all duration-200"
+              >
+                <i class="fas fa-backward text-xl"></i>
+              </button>
+              <button
+                id="player-play-btn"
+                class="w-20 h-20 rounded-full bg-gradient-to-r from-red-500 to-red-600 text-white flex items-center justify-center ripple shadow-2xl transform transition-all duration-200 hover:scale-105 active:scale-95"
+              >
+                <i class="fas fa-play text-2xl ml-1"></i>
+              </button>
+              <button
+                id="next-btn"
+                class="w-14 h-14 rounded-full glass-effect flex items-center justify-center text-gray-300 hover:text-white transition-all duration-200"
+              >
+                <i class="fas fa-forward text-xl"></i>
+              </button>
+            </div>
+            <button
+              id="playlist-add-btn"
+              class="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-white text-2xl transition-colors"
+            >
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+
+          <!-- Volume Control -->
+          <div class="flex items-center space-x-4">
+            <i class="fas fa-volume-down text-gray-400 text-lg"></i>
+            <input
+              type="range"
+              id="volume-slider"
+              class="progress-slider flex-1"
+              min="0"
+              max="1"
+              step="0.01"
+              value="1"
+            />
+            <i class="fas fa-volume-up text-gray-400 text-lg"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav
+        class="fixed bottom-0 left-0 right-0 safe-area-bottom glass-effect z-40"
+      >
+        <div class="max-w-sm mx-auto px-6 py-4">
+          <div class="flex justify-around items-center">
+            <button
+              id="nav-songs"
+              class="nav-btn flex flex-col items-center space-y-1 text-red-500 transition-all duration-300"
+            >
+              <i class="fas fa-music text-xl"></i>
+              <span class="text-xs font-semibold">Songs</span>
+            </button>
+            <button
+              id="nav-liked"
+              class="nav-btn flex flex-col items-center space-y-1 text-gray-400 hover:text-white transition-all duration-300"
+            >
+              <i class="fas fa-heart text-xl"></i>
+              <span class="text-xs font-semibold">Liked</span>
+            </button>
+            <button
+              id="nav-playlists"
+              class="nav-btn flex flex-col items-center space-y-1 text-gray-400 hover:text-white transition-all duration-300"
+            >
+              <i class="fas fa-list-ul text-xl"></i>
+              <span class="text-xs font-semibold">Playlists</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Modals -->
+      <!-- Create Playlist Modal -->
+      <div
+        id="create-playlist-modal"
+        class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[70] hidden flex items-center justify-center p-6"
+      >
+        <div class="glass-effect rounded-3xl p-6 w-full max-w-sm modal-enter">
+          <h3 class="text-xl font-bold text-white mb-6">Create Playlist</h3>
+          <input
+            type="text"
+            id="playlist-name-input"
+            placeholder="Enter playlist name"
+            class="w-full px-4 py-3 glass-effect rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500/50 mb-6"
+          />
+          <div class="flex space-x-3">
+            <button
+              id="cancel-playlist"
+              class="flex-1 py-3 glass-effect rounded-xl text-gray-400 hover:text-white font-semibold transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              id="create-playlist"
+              class="flex-1 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-semibold transition-all hover:from-red-600 hover:to-red-700"
+            >
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add to Playlist Modal -->
+      <div
+        id="add-to-playlist-modal"
+        class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[70] hidden flex items-center justify-center p-6"
+      >
+        <div class="glass-effect rounded-3xl p-6 w-full max-w-sm modal-enter">
+          <h3 class="text-xl font-bold text-white mb-6">Add to Playlist</h3>
+          <div
+            id="playlist-options"
+            class="space-y-3 max-h-64 overflow-y-auto no-scrollbar mb-6"
+          ></div>
+          <button
+            id="close-playlist-modal"
+            class="w-full py-3 glass-effect rounded-xl text-gray-400 hover:text-white font-semibold transition-colors"
+          >
+            Done
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Modal -->
+      <div
+        id="error-modal"
+        class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[80] hidden flex items-center justify-center p-6"
+      >
+        <div
+          class="bg-red-900/90 backdrop-blur-xl border border-red-500/30 rounded-3xl p-6 w-full max-w-sm text-center modal-enter"
+        >
+          <div
+            class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <i class="fas fa-exclamation-triangle text-red-400 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-red-200 mb-2">Playback Error</h3>
+          <p id="error-message" class="text-red-300 mb-6 leading-relaxed"></p>
+          <button
+            id="close-error"
+            class="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold transition-colors"
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script>
+      // PWA Registration
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("sw.js")
+            .then((registration) => {
+              console.log("SW registered: ", registration);
+            })
+            .catch((registrationError) => {
+              console.log("SW registration failed: ", registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
