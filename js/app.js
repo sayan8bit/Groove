@@ -16,7 +16,6 @@ class MusicPlayer {
     this.audio = new Audio();
     this.progressUpdateInterval = null;
     this.wakeLock = null;
-    this.songsLoaded = false; // Add loading state flag
 
     // PWA Audio Session Management
     this.setupMediaSession();
@@ -25,10 +24,9 @@ class MusicPlayer {
     this.initializeElements();
     this.attachEventListeners();
     this.setupAudio();
-    
+
     // Load songs from JSON file
     this.loadSongs().then(() => {
-      this.songsLoaded = true; // Mark songs as loaded
       this.render();
       // Hide loading screen after songs are loaded
       setTimeout(() => {
@@ -43,59 +41,45 @@ class MusicPlayer {
   // Load songs from JSON file
   async loadSongs() {
     try {
-      console.log('Loading songs from songs.json...');
-      const response = await fetch('songs.json');
+      const response = await fetch("songs.json");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
       this.songs = data.songs || [];
       this.filteredSongs = [...this.songs];
-      console.log('Songs loaded successfully:', this.songs.length, 'songs');
-      return true;
+      console.log("Songs loaded successfully:", this.songs.length, "songs");
     } catch (error) {
-      console.error('Error loading songs:', error);
-      // Use fallback songs if JSON loading fails
-      this.songs = this.getFallbackSongs();
-      this.filteredSongs = [...this.songs];
-      console.log('Using fallback songs:', this.songs.length, 'songs');
-      return false;
+      console.error("Error loading songs:", error);
+      this.showError(
+        "Failed to load music library. Please check your connection and refresh the page."
+      );
+      // Fallback to empty array if loading fails
+      this.songs = [];
+      this.filteredSongs = [];
     }
-  }
-
-  // Fallback songs in case JSON loading fails
-  getFallbackSongs() {
-    return [
-      {
-        id: "1",
-        title: "Demo Song",
-        artist: "Fallback Artist",
-        audioSrc: "https://www.soundjay.com/misc/sounds/click-1.wav",
-        coverArt: "https://placehold.co/100x100/9ca3af/ffffff?text=Demo"
-      }
-    ];
   }
 
   // PWA Media Session API for background playback
   setupMediaSession() {
-    if ('mediaSession' in navigator) {
-      navigator.mediaSession.setActionHandler('play', () => {
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.setActionHandler("play", () => {
         this.togglePlayPause();
       });
-      
-      navigator.mediaSession.setActionHandler('pause', () => {
+
+      navigator.mediaSession.setActionHandler("pause", () => {
         this.togglePlayPause();
       });
-      
-      navigator.mediaSession.setActionHandler('previoustrack', () => {
+
+      navigator.mediaSession.setActionHandler("previoustrack", () => {
         this.previousSong();
       });
-      
-      navigator.mediaSession.setActionHandler('nexttrack', () => {
+
+      navigator.mediaSession.setActionHandler("nexttrack", () => {
         this.nextSong();
       });
-      
-      navigator.mediaSession.setActionHandler('seekto', (details) => {
+
+      navigator.mediaSession.setActionHandler("seekto", (details) => {
         if (details.seekTime) {
           this.audio.currentTime = details.seekTime;
           this.updateProgress();
@@ -106,30 +90,52 @@ class MusicPlayer {
 
   // Update Media Session metadata
   updateMediaSession() {
-    if ('mediaSession' in navigator && this.currentSong) {
+    if ("mediaSession" in navigator && this.currentSong) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: this.currentSong.title,
         artist: this.currentSong.artist,
-        album: 'Groove Music',
+        album: "Groove Music",
         artwork: [
-          { src: this.currentSong.coverArt, sizes: '96x96', type: 'image/png' },
-          { src: this.currentSong.coverArt, sizes: '128x128', type: 'image/png' },
-          { src: this.currentSong.coverArt, sizes: '192x192', type: 'image/png' },
-          { src: this.currentSong.coverArt, sizes: '256x256', type: 'image/png' },
-          { src: this.currentSong.coverArt, sizes: '384x384', type: 'image/png' },
-          { src: this.currentSong.coverArt, sizes: '512x512', type: 'image/png' },
-        ]
+          { src: this.currentSong.coverArt, sizes: "96x96", type: "image/png" },
+          {
+            src: this.currentSong.coverArt,
+            sizes: "128x128",
+            type: "image/png",
+          },
+          {
+            src: this.currentSong.coverArt,
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: this.currentSong.coverArt,
+            sizes: "256x256",
+            type: "image/png",
+          },
+          {
+            src: this.currentSong.coverArt,
+            sizes: "384x384",
+            type: "image/png",
+          },
+          {
+            src: this.currentSong.coverArt,
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
       });
 
       // Update playback state
-      navigator.mediaSession.playbackState = this.isPlaying ? 'playing' : 'paused';
+      navigator.mediaSession.playbackState = this.isPlaying
+        ? "playing"
+        : "paused";
 
       // Update position state
       if (this.audio.duration) {
         navigator.mediaSession.setPositionState({
           duration: this.audio.duration,
           playbackRate: this.audio.playbackRate,
-          position: this.audio.currentTime
+          position: this.audio.currentTime,
         });
       }
     }
@@ -137,49 +143,30 @@ class MusicPlayer {
 
   // Wake Lock API to prevent screen from turning off during playback
   async setupWakeLock() {
-    if ('wakeLock' in navigator) {
-      // Listen for wake lock release events
-      document.addEventListener('visibilitychange', async () => {
-        if (this.wakeLock !== null && document.visibilityState === 'visible') {
-          // Re-acquire wake lock when page becomes visible
-          await this.requestWakeLock();
-        }
-      });
+    if ("wakeLock" in navigator) {
+      try {
+        this.wakeLock = await navigator.wakeLock.request("screen");
+        console.log("Wake lock acquired");
+      } catch (err) {
+        console.log("Wake lock failed:", err);
+      }
     }
   }
 
   async requestWakeLock() {
-    if ('wakeLock' in navigator) {
+    if ("wakeLock" in navigator && this.isPlaying) {
       try {
-        // Release existing wake lock first
-        if (this.wakeLock) {
-          await this.wakeLock.release();
-        }
-        
-        // Request new wake lock
-        this.wakeLock = await navigator.wakeLock.request('screen');
-        
-        this.wakeLock.addEventListener('release', () => {
-          console.log('Wake Lock was released');
-        });
-        
-        console.log('Wake lock acquired');
+        this.wakeLock = await navigator.wakeLock.request("screen");
       } catch (err) {
-        console.log('Wake lock request failed:', err);
+        console.log("Wake lock request failed:", err);
       }
     }
   }
 
   releaseWakeLock() {
     if (this.wakeLock) {
-      this.wakeLock.release()
-        .then(() => {
-          this.wakeLock = null;
-          console.log('Wake lock released');
-        })
-        .catch((err) => {
-          console.error('Failed to release wake lock:', err);
-        });
+      this.wakeLock.release();
+      this.wakeLock = null;
     }
   }
 
@@ -246,12 +233,8 @@ class MusicPlayer {
     });
 
     // Search functionality
-    this.searchToggle.addEventListener("click", () =>
-      this.toggleSearch()
-    );
-    this.searchClose.addEventListener("click", () =>
-      this.toggleSearch(false)
-    );
+    this.searchToggle.addEventListener("click", () => this.toggleSearch());
+    this.searchClose.addEventListener("click", () => this.toggleSearch(false));
     this.searchInput.addEventListener("input", (e) =>
       this.handleSearch(e.target.value)
     );
@@ -281,18 +264,12 @@ class MusicPlayer {
     this.playerElements.miniProgress.addEventListener("click", (e) => {
       e.stopPropagation();
     });
-    this.playerElements.miniProgress.addEventListener(
-      "mousedown",
-      (e) => {
-        e.stopPropagation();
-      }
-    );
-    this.playerElements.miniProgress.addEventListener(
-      "touchstart",
-      (e) => {
-        e.stopPropagation();
-      }
-    );
+    this.playerElements.miniProgress.addEventListener("mousedown", (e) => {
+      e.stopPropagation();
+    });
+    this.playerElements.miniProgress.addEventListener("touchstart", (e) => {
+      e.stopPropagation();
+    });
 
     // Full player
     document
@@ -310,9 +287,7 @@ class MusicPlayer {
     this.playerElements.likeBtn.addEventListener("click", () =>
       this.toggleLike()
     );
-    this.playerElements.progress.addEventListener("input", (e) =>
-      this.seek(e)
-    );
+    this.playerElements.progress.addEventListener("input", (e) => this.seek(e));
     this.playerElements.volumeSlider.addEventListener("input", (e) => {
       this.audio.volume = e.target.value;
     });
@@ -359,144 +334,24 @@ class MusicPlayer {
     // Prevent context menu on long press
     document.addEventListener("contextmenu", (e) => e.preventDefault());
 
-  // Setup visibility and focus handlers for background audio
-  setupVisibilityHandlers() {
-    // Handle page visibility changes
-    document.addEventListener('visibilitychange', () => {
-      this.handleVisibilityChange();
-    });
-
-    // Handle window focus/blur
-    window.addEventListener('focus', () => {
-      this.handleWindowFocus();
-    });
-
-    window.addEventListener('blur', () => {
-      this.handleWindowBlur();
-    });
-
-    // Handle page beforeunload to save state
-    window.addEventListener('beforeunload', () => {
-      this.savePlaybackState();
-    });
-
-    // Resume playback on load if needed
-    this.resumePlaybackIfNeeded();
-  }
-
-  handleVisibilityChange() {
-    if (document.visibilityState === 'visible') {
-      // Page became visible - try to resume if it was playing
-      this.handleWindowFocus();
-    } else {
-      // Page became hidden - save state but keep playing
-      this.savePlaybackState();
-    }
-  }
-
-  handleWindowFocus() {
-    console.log('Window gained focus');
-    
-    // Only try to resume if songs are loaded
-    if (!this.songsLoaded) {
-      console.log('Skipping focus handler - songs not loaded yet');
-      return;
-    }
-    
-    // Try to resume playback if it was interrupted
-    setTimeout(() => {
-      this.resumePlaybackIfNeeded();
-      if (this.isPlaying && this.currentSong) {
+    // Handle visibility change for PWA
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && this.isPlaying) {
         this.requestWakeLock();
       }
-    }, 100);
-  }
-
-  handleWindowBlur() {
-    console.log('Window lost focus');
-    this.savePlaybackState();
-  }
-
-  savePlaybackState() {
-    if (this.currentSong) {
-      const state = {
-        songId: this.currentSong.id,
-        currentTime: this.audio.currentTime || 0,
-        isPlaying: this.isPlaying && !this.audio.paused,
-        timestamp: Date.now(),
-        volume: this.audio.volume
-      };
-      localStorage.setItem('groovePlaybackState', JSON.stringify(state));
-      console.log('Saved playback state:', state);
-    }
-  }
-
-  resumePlaybackIfNeeded() {
-    // Don't try to resume if songs haven't loaded yet
-    if (!this.songsLoaded || this.songs.length === 0) {
-      console.log('Skipping resume - songs not loaded yet');
-      return;
-    }
-
-    try {
-      const savedState = localStorage.getItem('groovePlaybackState');
-      if (!savedState) return;
-
-      const state = JSON.parse(savedState);
-      const timeSinceLastSave = Date.now() - state.timestamp;
-      
-      // Only resume if it was recent (within 5 minutes) and was playing
-      if (timeSinceLastSave < 300000 && state.isPlaying) {
-        const song = this.songs.find(s => s.id === state.songId);
-        
-        if (song && (!this.currentSong || this.currentSong.id !== song.id)) {
-          console.log('Resuming playback:', song.title);
-          this.currentSong = song;
-          this.updatePlayerUI();
-          this.showMiniPlayer();
-          
-          this.audio.src = song.audioSrc;
-          this.audio.volume = state.volume || 1;
-          
-          // Set the saved time position
-          const handleLoadedMetadata = () => {
-            this.audio.currentTime = Math.min(state.currentTime, this.audio.duration);
-            this.audio.play().catch(error => {
-              console.log('Auto-resume failed, user interaction required:', error);
-            });
-            this.audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-          };
-          
-          this.audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-        } else if (this.currentSong && this.audio.paused && this.isPlaying) {
-          // Just resume current song if it was paused unexpectedly
-          this.audio.play().catch(error => {
-            console.log('Resume failed:', error);
-          });
-        }
-      }
-    } catch (error) {
-      console.error('Error resuming playback:', error);
-    }
-  }
+    });
   }
 
   setupAudio() {
-    // Enhanced background audio configuration
-    this.audio.preload = 'metadata';
-    this.audio.crossOrigin = 'anonymous';
-    
-    // Prevent automatic pause on mobile
-    this.audio.setAttribute('playsinline', true);
-    this.audio.setAttribute('webkit-playsinline', true);
-    
+    // Enable background audio
+    this.audio.preload = "metadata";
+
     this.audio.addEventListener("loadedmetadata", () => {
       const duration = this.audio.duration;
       this.playerElements.progress.max = duration;
       this.playerElements.miniProgress.max = duration;
-      this.playerElements.totalTime.textContent =
-        this.formatTime(duration);
-      
+      this.playerElements.totalTime.textContent = this.formatTime(duration);
+
       // Update media session
       this.updateMediaSession();
     });
@@ -518,14 +373,6 @@ class MusicPlayer {
       this.startVisualizer();
       this.updateMediaSession();
       this.requestWakeLock();
-      
-      // Store play state for resumption
-      localStorage.setItem('grooveLastPlayState', JSON.stringify({
-        songId: this.currentSong?.id,
-        currentTime: this.audio.currentTime,
-        isPlaying: true,
-        timestamp: Date.now()
-      }));
     });
 
     this.audio.addEventListener("pause", () => {
@@ -534,23 +381,12 @@ class MusicPlayer {
       this.stopVisualizer();
       this.updateMediaSession();
       this.releaseWakeLock();
-      
-      // Store pause state
-      localStorage.setItem('grooveLastPlayState', JSON.stringify({
-        songId: this.currentSong?.id,
-        currentTime: this.audio.currentTime,
-        isPlaying: false,
-        timestamp: Date.now()
-      }));
     });
 
     this.audio.addEventListener("error", (e) => {
       this.showError("Failed to load audio. Please check the song URL.");
       console.error("Audio error:", e);
     });
-
-    // Handle browser/tab focus events
-    this.setupVisibilityHandlers();
   }
 
   formatTime(seconds) {
@@ -570,8 +406,7 @@ class MusicPlayer {
     this.playerElements.miniProgress.value = progress;
 
     // Update time display
-    this.playerElements.currentTime.textContent =
-      this.formatTime(progress);
+    this.playerElements.currentTime.textContent = this.formatTime(progress);
   }
 
   seek(event = null) {
@@ -589,7 +424,7 @@ class MusicPlayer {
     // Update both progress bars to stay in sync
     this.playerElements.progress.value = time;
     this.playerElements.miniProgress.value = time;
-    
+
     // Update media session position
     this.updateMediaSession();
   }
@@ -663,10 +498,7 @@ class MusicPlayer {
       btn.classList.add("text-gray-400", "hover:text-white");
     });
 
-    this.navButtons[view].classList.remove(
-      "text-gray-400",
-      "hover:text-white"
-    );
+    this.navButtons[view].classList.remove("text-gray-400", "hover:text-white");
     this.navButtons[view].classList.add("text-red-500");
 
     // Hide all views
@@ -738,9 +570,7 @@ class MusicPlayer {
       return;
     }
     this.playlists.forEach((playlist) => {
-      this.lists.playlists.appendChild(
-        this.createPlaylistElement(playlist)
-      );
+      this.lists.playlists.appendChild(this.createPlaylistElement(playlist));
     });
   }
 
@@ -768,18 +598,12 @@ class MusicPlayer {
                     <p class="font-semibold text-white truncate">${
                       song.title
                     }</p>
-                    <p class="text-sm text-gray-400 truncate">${
-                      song.artist
-                    }</p>
+                    <p class="text-sm text-gray-400 truncate">${song.artist}</p>
                 </div>
                 <button class="like-btn w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-                  isLiked
-                    ? "text-red-500"
-                    : "text-gray-400 hover:text-red-400"
+                  isLiked ? "text-red-500" : "text-gray-400 hover:text-red-400"
                 }">
-                    <i class="${
-                      isLiked ? "fas" : "far"
-                    } fa-heart text-lg"></i>
+                    <i class="${isLiked ? "fas" : "far"} fa-heart text-lg"></i>
                 </button>
             `;
 
@@ -822,9 +646,7 @@ class MusicPlayer {
       this.deletePlaylist(playlist.id);
     });
 
-    element.addEventListener("click", () =>
-      this.showPlaylistDetail(playlist)
-    );
+    element.addEventListener("click", () => this.showPlaylistDetail(playlist));
 
     return element;
   }
@@ -835,46 +657,22 @@ class MusicPlayer {
 
     if (songsCount)
       songsCount.textContent = `${this.filteredSongs.length} songs`;
-    if (likedCount)
-      likedCount.textContent = `${this.likedSongs.length} songs`;
+    if (likedCount) likedCount.textContent = `${this.likedSongs.length} songs`;
   }
 
   playSong(song) {
     this.currentSong = song;
     this.currentPlaylist =
       this.filteredSongs.length > 0 ? this.filteredSongs : this.songs;
-    this.currentIndex = this.currentPlaylist.findIndex(
-      (s) => s.id === song.id
-    );
+    this.currentIndex = this.currentPlaylist.findIndex((s) => s.id === song.id);
 
-    // Clear any existing audio source
-    this.audio.pause();
-    this.audio.currentTime = 0;
-    
     this.audio.src = song.audioSrc;
-    
-    // Enhanced play with user interaction handling
-    const playPromise = this.audio.play();
-    
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        console.log('Audio playback started successfully');
-        this.savePlaybackState();
-      }).catch((error) => {
-        console.error('Playback error:', error);
-        
-        if (error.name === 'NotAllowedError') {
-          // User interaction required
-          this.showError(
-            "Please tap the play button to start audio. Browser requires user interaction for autoplay."
-          );
-        } else {
-          this.showError(
-            "Unable to play this song. Please check your internet connection or try another song."
-          );
-        }
-      });
-    }
+    this.audio.play().catch((error) => {
+      this.showError(
+        "Unable to play this song. Please check your internet connection or try another song."
+      );
+      console.error("Playback error:", error);
+    });
 
     this.updatePlayerUI();
     this.showMiniPlayer();
@@ -904,8 +702,7 @@ class MusicPlayer {
 
   nextSong() {
     if (!this.currentPlaylist.length) return;
-    this.currentIndex =
-      (this.currentIndex + 1) % this.currentPlaylist.length;
+    this.currentIndex = (this.currentIndex + 1) % this.currentPlaylist.length;
     this.playSong(this.currentPlaylist[this.currentIndex]);
   }
 
@@ -952,9 +749,7 @@ class MusicPlayer {
   updateLikeButton() {
     if (!this.currentSong) return;
 
-    const isLiked = this.likedSongs.some(
-      (s) => s.id === this.currentSong.id
-    );
+    const isLiked = this.likedSongs.some((s) => s.id === this.currentSong.id);
     const icon = this.playerElements.likeBtn.querySelector("i");
 
     if (isLiked) {
@@ -1012,25 +807,18 @@ class MusicPlayer {
     this.playerElements.modal.classList.add("modal-exit");
     setTimeout(() => {
       this.playerElements.modal.classList.add("hidden");
-      this.playerElements.modal.classList.remove(
-        "modal-enter",
-        "modal-exit"
-      );
+      this.playerElements.modal.classList.remove("modal-enter", "modal-exit");
       document.body.style.overflow = "";
     }, 300);
   }
 
   showCreatePlaylistModal() {
-    document
-      .getElementById("create-playlist-modal")
-      .classList.remove("hidden");
+    document.getElementById("create-playlist-modal").classList.remove("hidden");
     document.getElementById("playlist-name-input").focus();
   }
 
   hideCreatePlaylistModal() {
-    document
-      .getElementById("create-playlist-modal")
-      .classList.add("hidden");
+    document.getElementById("create-playlist-modal").classList.add("hidden");
   }
 
   showAddToPlaylistModal() {
@@ -1094,9 +882,7 @@ class MusicPlayer {
   }
 
   hideAddToPlaylistModal() {
-    document
-      .getElementById("add-to-playlist-modal")
-      .classList.add("hidden");
+    document.getElementById("add-to-playlist-modal").classList.add("hidden");
   }
 
   createPlaylist() {
@@ -1114,9 +900,7 @@ class MusicPlayer {
 
     // Check for duplicate names
     if (
-      this.playlists.some(
-        (p) => p.name.toLowerCase() === name.toLowerCase()
-      )
+      this.playlists.some((p) => p.name.toLowerCase() === name.toLowerCase())
     ) {
       this.showError("A playlist with this name already exists");
       return;
@@ -1156,9 +940,7 @@ class MusicPlayer {
       this.saveData();
 
       // Show success feedback
-      this.showToast(
-        `Added "${song.title}" to "${playlist.name}"`
-      );
+      this.showToast(`Added "${song.title}" to "${playlist.name}"`);
     }
   }
 
@@ -1171,9 +953,7 @@ class MusicPlayer {
       this.saveData();
 
       // Show success feedback
-      this.showToast(
-        `Removed "${song.title}" from "${playlist.name}"`
-      );
+      this.showToast(`Removed "${song.title}" from "${playlist.name}"`);
     }
   }
 
@@ -1247,8 +1027,7 @@ class MusicPlayer {
 
     this.views.playlistDetail.classList.remove("hidden");
     Object.values(this.views).forEach((view) => {
-      if (view !== this.views.playlistDetail)
-        view.classList.add("hidden");
+      if (view !== this.views.playlistDetail) view.classList.add("hidden");
     });
   }
 
