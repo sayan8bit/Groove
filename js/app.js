@@ -41,7 +41,7 @@ class MusicPlayer {
   // Load songs from JSON file
   async loadSongs() {
     try {
-      const response = await fetch('../songs.json');
+      const response = await fetch('songs.json');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
