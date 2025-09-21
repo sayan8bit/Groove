@@ -17,9 +17,6 @@ class MusicPlayer {
     this.progressUpdateInterval = null;
     this.wakeLock = null;
 
-    // Local storage key for temporary song cache
-    this.tempSongCacheKey = "grooveTempSongCache";
-
     // PWA Audio Session Management
     this.setupMediaSession();
     this.setupWakeLock();
@@ -547,12 +544,12 @@ class MusicPlayer {
     this.lists.liked.innerHTML = "";
     if (this.likedSongs.length === 0) {
       this.lists.liked.innerHTML = `
-          <div class="text-center py-16 text-gray-400">
-            <i class="fas fa-heart text-4xl mb-4 opacity-50"></i>
-            <p class="text-lg font-medium">No liked songs yet</p>
-            <p class="text-sm">Songs you like will appear here</p>
-          </div>
-        `;
+                <div class="text-center py-16 text-gray-400">
+                    <i class="fas fa-heart text-4xl mb-4 opacity-50"></i>
+                    <p class="text-lg font-medium">No liked songs yet</p>
+                    <p class="text-sm">Songs you like will appear here</p>
+                </div>
+            `;
       return;
     }
     this.likedSongs.forEach((song) => {
@@ -564,12 +561,12 @@ class MusicPlayer {
     this.lists.playlists.innerHTML = "";
     if (this.playlists.length === 0) {
       this.lists.playlists.innerHTML = `
-          <div class="text-center py-16 text-gray-400">
-            <i class="fas fa-list-ul text-4xl mb-4 opacity-50"></i>
-            <p class="text-lg font-medium">No playlists yet</p>
-            <p class="text-sm">Create a playlist to get started</p>
-          </div>
-        `;
+                <div class="text-center py-16 text-gray-400">
+                    <i class="fas fa-list-ul text-4xl mb-4 opacity-50"></i>
+                    <p class="text-lg font-medium">No playlists yet</p>
+                    <p class="text-sm">Create a playlist to get started</p>
+                </div>
+            `;
       return;
     }
     this.playlists.forEach((playlist) => {
@@ -587,28 +584,28 @@ class MusicPlayer {
     }`;
 
     element.innerHTML = `
-          <div class="relative">
-            <img src="${song.coverArt}" alt="${
+                <div class="relative">
+                    <img src="${song.coverArt}" alt="${
       song.title
     }" class="w-14 h-14 rounded-xl object-cover shadow-lg" />
-            ${
-              isPlaying
-                ? '<div class="music-visualizer absolute -top-1 -right-1"><span></span><span></span><span></span><span></span></div>'
-                : ""
-            }
-          </div>
-          <div class="flex-1 min-w-0">
-            <p class="font-semibold text-white truncate">${
-              song.title
-            }</p>
-            <p class="text-sm text-gray-400 truncate">${song.artist}</p>
-          </div>
-          <button class="like-btn w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-            isLiked ? "text-red-500" : "text-gray-400 hover:text-red-400"
-          }">
-            <i class="${isLiked ? "fas" : "far"} fa-heart text-lg"></i>
-          </button>
-        `;
+                    ${
+                      isPlaying
+                        ? '<div class="music-visualizer absolute -top-1 -right-1"><span></span><span></span><span></span><span></span></div>'
+                        : ""
+                    }
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="font-semibold text-white truncate">${
+                      song.title
+                    }</p>
+                    <p class="text-sm text-gray-400 truncate">${song.artist}</p>
+                </div>
+                <button class="like-btn w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                  isLiked ? "text-red-500" : "text-gray-400 hover:text-red-400"
+                }">
+                    <i class="${isLiked ? "fas" : "far"} fa-heart text-lg"></i>
+                </button>
+            `;
 
     const likeBtn = element.querySelector(".like-btn");
     likeBtn.addEventListener("click", (e) => {
@@ -627,21 +624,21 @@ class MusicPlayer {
       "glass-effect rounded-2xl p-4 flex items-center space-x-4 cursor-pointer transition-all duration-300 hover:bg-white/5";
 
     element.innerHTML = `
-          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white shadow-lg">
-            <i class="fas fa-list-ul text-xl"></i>
-          </div>
-          <div class="flex-1 min-w-0">
-            <p class="font-semibold text-white truncate">${
-              playlist.name
-            }</p>
-            <p class="text-sm text-gray-400">${
-              playlist.songs.length
-            } song${playlist.songs.length !== 1 ? "s" : ""}</p>
-          </div>
-          <button class="delete-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-red-400 transition-colors">
-            <i class="fas fa-trash text-sm"></i>
-          </button>
-        `;
+                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white shadow-lg">
+                    <i class="fas fa-list-ul text-xl"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="font-semibold text-white truncate">${
+                      playlist.name
+                    }</p>
+                    <p class="text-sm text-gray-400">${
+                      playlist.songs.length
+                    } song${playlist.songs.length !== 1 ? "s" : ""}</p>
+                </div>
+                <button class="delete-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-red-400 transition-colors">
+                    <i class="fas fa-trash text-sm"></i>
+                </button>
+            `;
 
     const deleteBtn = element.querySelector(".delete-btn");
     deleteBtn.addEventListener("click", (e) => {
@@ -663,51 +660,19 @@ class MusicPlayer {
     if (likedCount) likedCount.textContent = `${this.likedSongs.length} songs`;
   }
 
-  async playSong(song) {
+  playSong(song) {
     this.currentSong = song;
     this.currentPlaylist =
       this.filteredSongs.length > 0 ? this.filteredSongs : this.songs;
     this.currentIndex = this.currentPlaylist.findIndex((s) => s.id === song.id);
 
-    try {
-      let audioData = localStorage.getItem(this.tempSongCacheKey);
-
-      if (audioData && JSON.parse(audioData).id === song.id) {
-        // Song is in local storage, use cached URL
-        this.audio.src = JSON.parse(audioData).url;
-        console.log("Playing from cache:", song.title);
-      } else {
-        // Song is not cached, fetch and cache it
-        const response = await fetch(song.audioSrc);
-        if (!response.ok) throw new Error("Failed to fetch audio file");
-        const blob = await response.blob();
-        const objectUrl = URL.createObjectURL(blob);
-        
-        // Save the blob data and the song ID to local storage
-        localStorage.setItem(this.tempSongCacheKey, JSON.stringify({ id: song.id, url: objectUrl }));
-        
-        this.audio.src = objectUrl;
-        console.log("Fetched and cached:", song.title);
-      }
-      
-      this.audio.play().catch((error) => {
-        this.showError(
-          "Unable to play this song. Please check your internet connection or try another song."
-        );
-        console.error("Playback error:", error);
-      });
-
-    } catch (error) {
+    this.audio.src = song.audioSrc;
+    this.audio.play().catch((error) => {
       this.showError(
-        "Failed to load audio. Please check the song URL."
+        "Unable to play this song. Please check your internet connection or try another song."
       );
-      console.error("Audio caching/playback error:", error);
-      this.audio.src = song.audioSrc;
-      this.audio.play().catch(e => {
-        this.showError("Playback failed. Please try again.");
-        console.error("Fallback playback error:", e);
-      });
-    }
+      console.error("Playback error:", error);
+    });
 
     this.updatePlayerUI();
     this.showMiniPlayer();
@@ -869,12 +834,12 @@ class MusicPlayer {
 
     if (this.playlists.length === 0) {
       options.innerHTML = `
-          <div class="text-center py-8 text-gray-400">
-            <i class="fas fa-list-ul text-2xl mb-2 opacity-50"></i>
-            <p class="text-sm">No playlists available</p>
-            <p class="text-xs mt-1">Create a playlist first</p>
-          </div>
-        `;
+                <div class="text-center py-8 text-gray-400">
+                    <i class="fas fa-list-ul text-2xl mb-2 opacity-50"></i>
+                    <p class="text-sm">No playlists available</p>
+                    <p class="text-xs mt-1">Create a playlist first</p>
+                </div>
+            `;
     } else {
       this.playlists.forEach((playlist) => {
         const inPlaylist = playlist.songs.includes(this.currentSong.id);
@@ -882,20 +847,20 @@ class MusicPlayer {
         option.className =
           "flex items-center justify-between p-3 glass-effect rounded-xl cursor-pointer hover:bg-white/5 transition-colors";
         option.innerHTML = `
-              <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white text-xs">
-                  <i class="fas fa-list-ul"></i>
-                </div>
-                <span class="text-white font-medium">${
-                  playlist.name
-                }</span>
-              </div>
-              <i class="fas ${
-                inPlaylist
-                  ? "fa-check text-green-400"
-                  : "fa-plus text-gray-400"
-              } text-lg transition-colors"></i>
-            `;
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white text-xs">
+                                <i class="fas fa-list-ul"></i>
+                            </div>
+                            <span class="text-white font-medium">${
+                              playlist.name
+                            }</span>
+                        </div>
+                        <i class="fas ${
+                          inPlaylist
+                            ? "fa-check text-green-400"
+                            : "fa-plus text-gray-400"
+                        } text-lg transition-colors"></i>
+                    `;
 
         option.addEventListener("click", () => {
           if (inPlaylist) {
@@ -1032,12 +997,12 @@ class MusicPlayer {
 
     if (playlist.songs.length === 0) {
       this.lists.playlistSongs.innerHTML = `
-          <div class="text-center py-16 text-gray-400">
-            <i class="fas fa-music text-4xl mb-4 opacity-50"></i>
-            <p class="text-lg font-medium">Empty playlist</p>
-            <p class="text-sm">Add songs to this playlist</p>
-          </div>
-        `;
+                <div class="text-center py-16 text-gray-400">
+                    <i class="fas fa-music text-4xl mb-4 opacity-50"></i>
+                    <p class="text-lg font-medium">Empty playlist</p>
+                    <p class="text-sm">Add songs to this playlist</p>
+                </div>
+            `;
     } else {
       const playlistSongs = playlist.songs
         .map((id) => this.songs.find((s) => s.id === id))
