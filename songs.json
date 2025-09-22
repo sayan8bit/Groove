@@ -44,28 +44,29 @@
     },
     {
       "id": "6",
-      "title": "The Lounge",
-      "artist": "Bensound",
-      "audioSrc": "https://www.bensound.com/bensound-music/bensound-thelounge.mp3",
-      "coverArt": "https://placehold.co/100x100/38bdf8/ffffff?text=Lounge"
+      "title": "Me Myself and The Night",
+      "artist": "Alan Walker",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/92pdar0b2lvutl59thhes/Alan-Walker-Me-Myself-and-The-Night-Official-Music-Video.opus?rlkey=43oyxdwegdbuiaul3e5xx9o7v&st=wvjbiyv7",
+      "coverArt": "https://placehold.co/100x100/38bdf8/ffffff?text=Me Myself and The Nigh"
     },
     {
       "id": "7",
-      "title": "Ukulele",
-      "artist": "Bensound",
-      "audioSrc": "https://www.bensound.com/bensound-music/bensound-ukulele.mp3",
-      "coverArt": "https://placehold.co/100x100/f59e0b/ffffff?text=Ukulele"
+      "title": "Lily",
+      "artist": "Alan Walker",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/5o0tk955w3xkgwkox0d34/Alan-Walker-Lily-Official-Lyric-Video.opus?rlkey=a0nk9ok4911fzum9pog4tiylt&st=9dtcxf91",
+      "coverArt": "https://placehold.co/100x100/f59e0b/ffffff?text=Lily"
     },
     {
       "id": "8",
-      "title": "Happiness",
-      "artist": "Bensound",
-      "audioSrc": "https://www.bensound.com/bensound-music/bensound-happiness.mp3",
-      "coverArt": "https://placehold.co/100x100/10b981/ffffff?text=Happy"
+      "title": "Darkside",
+      "artist": "Alan Walker",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/8vqxcz3gbfp9p1ify7p69/Alan-Walker-Darkside-feat.-Au-Ra-and-Tomine-Harket.opus?rlkey=u8ewm8jvvp5aya07toxbijzkh&st=ubzwe4tv",
+      "coverArt": "https://placehold.co/100x100/10b981/ffffff?text=Darkside"
     }
   ]
 
 }
+
 
 
 
