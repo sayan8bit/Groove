@@ -1,6 +1,27 @@
 {
   "songs": [
     {
+      "id": "26",
+      "title": "Broken",
+      "artist": "Nightcore",
+      "audioSrc": "https://www.dropbox.com/scl/fi/y38sn4pjeom20j05oi2q8/Nightcore-Broken-Lyrics.opus?rlkey=ni8cixstmxz4boip45n8ns983&st=txpsjvu6",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Broken"
+    },
+    {
+      "id": "25",
+      "title": "Broken",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/y38sn4pjeom20j05oi2q8/Nightcore-Broken-Lyrics.opus?rlkey=ni8cixstmxz4boip45n8ns983&st=txpsjvu6",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Broken"
+    },
+    {
+      "id": "24",
+      "title": "Tattoo",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/68u6qqswqst2xlonemrz8/Nightcore-Tattoo-Loreen-Lyrics.opus?rlkey=exq72xwwmua0hv4fs0811omwj&st=4dqecxd1",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Tattoo"
+    },
+    {
       "id": "23",
       "title": "Boulevard of Broken Dreams",
       "artist": "Nightcore",
@@ -164,6 +185,7 @@
   ]
 
 }
+
 
 
 
