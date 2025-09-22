@@ -1,6 +1,20 @@
 {
   "songs": [
     {
+      "id": "16",
+      "title": "Judas",
+      "artist": "Lady Gaga",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/kfemclqhhwp0bjqpggu03/Lady-Gaga-Judas-Lyrics.opus?rlkey=7dc7egzagjod00cyzotlvf6jn&st=cs5drth1",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Judas"
+    },
+    {
+      "id": "15",
+      "title": "Bloody Mary",
+      "artist": "Lady Gaga",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/kvb71m02dtpx9szg1j2jj/Lady-Gaga-Bloody-Mary-Official-Audio.opus?rlkey=a78jc4oe476x0hyvfgpwaw2hx&st=ap3vrejg",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Bloody Mary"
+    },
+    {
       "id": "14",
       "title": "Mortals x Royalty",
       "artist": "NCS",
@@ -101,6 +115,7 @@
   ]
 
 }
+
 
 
 
