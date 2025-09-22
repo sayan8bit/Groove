@@ -1,9 +1,21 @@
 {
   "songs": [
     {
+      "title": "Mortals x Royalty",
+      "artist": "NCS",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/0630vr40wz8z0pme0dyk5/Mortals-x-Royalty-Mashup-NCS-Copyright-Free-Music.opus?rlkey=6b6j0g2h63fdoeplx8tl1ywu9&st=hbh1bi1e",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=MortalsXRoyalty"
+    },
+    {
+      "title": "Where We Started",
+      "artist": "Lost Sky",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/eyyhpakfuzladaqzf4r7y/Lost-Sky-Where-We-Started-feat.-Jex-Melodic-Dubstep-NCS-Copyright-Free-Music.opus?rlkey=eows759ntgqrmc0b6pxepr4uk&st=jnr6f2c9",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Where We Started"
+    },
+    {
       "title": "Vision",
       "artist": "Lost Sky",
-      "audioSrc": "https://www.dropbox.com/scl/fi/miisa3padik9dwhm1jkei/Lost-Sky-Vision-pt.-II-feat.-She-Is-Jules-Future-Trap-NCS-Copyright-Free-Music.opus?rlkey=qcir0e8e6eo135ddx1ne94xiz&st=wx3oz2sl",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/miisa3padik9dwhm1jkei/Lost-Sky-Vision-pt.-II-feat.-She-Is-Jules-Future-Trap-NCS-Copyright-Free-Music.opus?rlkey=qcir0e8e6eo135ddx1ne94xiz&st=wx3oz2sl",
       "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Vision"
     },
     {
@@ -83,6 +95,7 @@
   ]
 
 }
+
 
 
 
