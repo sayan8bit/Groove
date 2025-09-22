@@ -1,6 +1,55 @@
 {
   "songs": [
     {
+      "id": "23",
+      "title": "Boulevard of Broken Dreams",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/xqtd0d3adoahjwemxh4zm/Nightcore-Boulevard-of-Broken-Dreams-Lyrics.opus?rlkey=37ew63e3gihmahl9m20jzgfo4&st=hl17j53h",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Boulevard of Broken Dreams"
+    },
+    {
+      "id": "22",
+      "title": "Sorry",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/z391y0kpmh9qjfnu7ytxv/Nightcore-Sorry-Lyrics.opus?rlkey=yc989j24m3br6lsgiogi52wcc&st=dhr8fbwg",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Sorry"
+    },
+    {
+      "id": "21",
+      "title": "Six Pills",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/v3u2i74sj1ygle7f9nat1/Nightcore-Six-Pills-Lyrics.opus?rlkey=x6k34oqqqt716xv3rr816lrn3&st=7qalp7x0",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Six Pills"
+    },
+    {
+      "id": "20",
+      "title": "Seven Days",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/9ght49q6uxh075zu2gcta/Nightcore-Seven-Days-Lyrics.opus?rlkey=oqr0fs1f6ghhghv5l9q55p9wm&st=yd5bl173",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Seven Days"
+    },
+    {
+      "id": "19",
+      "title": "The Tide",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/r4tg04r05ir88r6nelo4o/Nightcore-The-Tide-Lyrics.opus?rlkey=ev8475kmhy3zjdloierhfsil4&st=mzsie6cu",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=The Tide"
+    },
+    {
+      "id": "18",
+      "title": "Without Me",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/dai75vqlz7rkwboq446e1/Nightcore-Without-Me-Male-Version-Lyrics.opus?rlkey=ehr7w34bzuwh1neccsyx5wx7h&st=wl04kgef",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Without Me"
+    },
+    {
+      "id": "17",
+      "title": "I Should Have Known",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/yuknh2x002w30zj5ue8c1/Nightcore-I-Should-Have-Known.opus?rlkey=wscj9fdfoqdvmgx9p6rximnes&st=lrg36y09",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=I Should Have Known"
+    },
+    {
       "id": "16",
       "title": "Judas",
       "artist": "Lady Gaga",
@@ -115,6 +164,7 @@
   ]
 
 }
+
 
 
 
