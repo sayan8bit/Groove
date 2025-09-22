@@ -1,7 +1,19 @@
 {
   "songs": [
+         {
+      "title": "",
+      "artist": "",
+      "audioSrc": "https://www.dropbox.com/scl/fi/jfisqiqcig8cpyl7mtgde/Clean-Bandit-Solo-slowed-reverb.opus?rlkey=l7j6j39y8i6x2d3q4mn7sorif&st=3tn29hge",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Solo"
+    },
+
+     {
+      "title": "Solo",
+      "artist": "Clean Bandit",
+      "audioSrc": "https://www.dropbox.com/scl/fi/jfisqiqcig8cpyl7mtgde/Clean-Bandit-Solo-slowed-reverb.opus?rlkey=l7j6j39y8i6x2d3q4mn7sorif&st=3tn29hge",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Solo"
+    },
     {
-      
       "title": "The Spectre",
       "artist": "Alan Walker",
       "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/h3egyhpnsuasascvwi94z/Alan-Walker-The-Spectre.opus?rlkey=19czaghsw3owwx7zamxi0u75v&st=qzm8jslv",
@@ -66,6 +78,7 @@
   ]
 
 }
+
 
 
 
