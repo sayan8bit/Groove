@@ -1,16 +1,21 @@
 {
   "songs": [
-         {
-      "title": "",
-      "artist": "",
-      "audioSrc": "https://www.dropbox.com/scl/fi/jfisqiqcig8cpyl7mtgde/Clean-Bandit-Solo-slowed-reverb.opus?rlkey=l7j6j39y8i6x2d3q4mn7sorif&st=3tn29hge",
-      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Solo"
+    {
+      "title": "Vision",
+      "artist": "Lost Sky",
+      "audioSrc": "https://www.dropbox.com/scl/fi/miisa3padik9dwhm1jkei/Lost-Sky-Vision-pt.-II-feat.-She-Is-Jules-Future-Trap-NCS-Copyright-Free-Music.opus?rlkey=qcir0e8e6eo135ddx1ne94xiz&st=wx3oz2sl",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Vision"
     },
-
+    {
+      "title": "Dreams",
+      "artist": "Lost Sky",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/autgv7gj1t77iaklcacrn/Lost-Sky-Dreams-pt.-II-feat.-Sara-Skinner-Trap-NCS-Copyright-Free-Music.opus?rlkey=pdofwja78jbjzrt6ipv47dkzl&st=kr86zvyb",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Dreams"
+    },
      {
       "title": "Solo",
       "artist": "Clean Bandit",
-      "audioSrc": "https://www.dropbox.com/scl/fi/jfisqiqcig8cpyl7mtgde/Clean-Bandit-Solo-slowed-reverb.opus?rlkey=l7j6j39y8i6x2d3q4mn7sorif&st=3tn29hge",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/jfisqiqcig8cpyl7mtgde/Clean-Bandit-Solo-slowed-reverb.opus?rlkey=l7j6j39y8i6x2d3q4mn7sorif&st=3tn29hge",
       "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Solo"
     },
     {
@@ -78,6 +83,7 @@
   ]
 
 }
+
 
 
 
