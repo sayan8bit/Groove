@@ -1,6 +1,13 @@
 {
   "songs": [
     {
+      
+      "title": "The Spectre",
+      "artist": "Alan Walker",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/h3egyhpnsuasascvwi94z/Alan-Walker-The-Spectre.opus?rlkey=19czaghsw3owwx7zamxi0u75v&st=qzm8jslv",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=The Spectre"
+    },
+    {
       "id": "1",
       "title": "demo",
       "artist": "Bensound",
@@ -59,5 +66,6 @@
   ]
 
 }
+
 
 
