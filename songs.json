@@ -9,31 +9,31 @@
     },
     {
       "id": "2",
-      "title": "Summer",
-      "artist": "Bensound",
-      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/po6sd98j29vm0c5mk8jxc/Fang-yuan.mp3?rlkey=8i1ymxkqn08psizjlvqs3i308&raw=1",
-      "coverArt": "https://placehold.co/100x100/fca5a5/ffffff?text=Summer"
+      "title": "Alone",
+      "artist": "Alan Walker",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/hb3irht5ntp9z0xpuy04i/Alan-Walker-Alone.opus?rlkey=k8oh3vspnvkp50ql0qd4zc4sg&st=9xurcii5",
+      "coverArt": "https://placehold.co/100x100/fca5a5/ffffff?text=Alone"
     },
     {
       "id": "3",
       "title": "Faded",
       "artist": "Alan Walker",
       "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/1xw9t6gjlavjxy3six40b/Alan-Walker-Faded.opus?rlkey=yl14mntjfcg2lzvy2ttdajpsr&st=eo46q3dx",
-      "coverArt": "https://placehold.co/100x100/94a3b8/ffffff?text=Jazzy"
+      "coverArt": "https://placehold.co/100x100/94a3b8/ffffff?text=Faded"
     },
     {
       "id": "4",
-      "title": "Sunny",
-      "artist": "Bensound",
-      "audioSrc": "https://www.bensound.com/bensound-music/bensound-sunny.mp3",
-      "coverArt": "https://placehold.co/100x100/d1d5db/ffffff?text=Sunny"
+      "title": "On My Way",
+      "artist": "Alan Walker",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/5e6tggtnrp9ud12ae1ne5/Alan-Walker-Sabrina-Carpenter-Farruko-On-My-Way.opus?rlkey=y8hzjy114o98whh1oxryghns8&st=ybxc4sy9",
+      "coverArt": "https://placehold.co/100x100/d1d5db/ffffff?text=On My Way"
     },
     {
       "id": "5",
-      "title": "Creative Minds",
-      "artist": "Bensound",
-      "audioSrc": "https://www.bensound.com/bensound-music/bensound-creativeminds.mp3",
-      "coverArt": "https://placehold.co/100x100/a78bfa/ffffff?text=Creative"
+      "title": "Ignite",
+      "artist": "K-391 & Alan Walker",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/rq2jq7qliun9a1anq5sqv/K-391-Alan-Walker-Ignite-feat.-Julie-Bergan-Seungri.opus?rlkey=qpmis6e2lyxd5e9eagh2kj44e&st=6grcsbjg",
+      "coverArt": "https://placehold.co/100x100/a78bfa/ffffff?text=Ignite"
     },
     {
       "id": "6",
@@ -59,4 +59,5 @@
   ]
 
 }
+
 
