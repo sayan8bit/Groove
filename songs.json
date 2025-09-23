@@ -1,11 +1,67 @@
 {
   "songs": [
     {
-      "id": "26",
-      "title": "Broken",
+      "id": "34",
+      "title": "If I Surrender",
+      "artist": "Citizen Soldier",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/xy2cvh078dc5pnyi9kt57/Nightcore-Citizen-Soldier-If-I-Surrender-Lyrics.opus?rlkey=8q7xlezpitc9a06uwntkrmedw&st=xsnncz0e",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=If I Surrender"
+    },
+    {
+      "id": "33",
+      "title": "Would Anyone Care",
+      "artist": "Citizen Soldier",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/gndzu99sx7qa3pr7m2w8i/Nightcore-Would-Anyone-Care-Citizen-Soldier-Lyrics.opus?rlkey=tl718jj8lzyig82xmi0frew1l&st=feqm69y7",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Would Anyone Care"
+    },
+    {
+      "id": "32",
+      "title": "Tears Don't Lie",
       "artist": "Nightcore",
-      "audioSrc": "https://www.dropbox.com/scl/fi/y38sn4pjeom20j05oi2q8/Nightcore-Broken-Lyrics.opus?rlkey=ni8cixstmxz4boip45n8ns983&st=txpsjvu6",
-      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Broken"
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/742goxowgs7qhler9fl80/Nightcore-Tears-Don-t-Lie-Lyrics.opus?rlkey=1j1gubk5acvts7n56bg274m90&st=sezq21xf",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Tears Don't lie"
+    },
+    {
+      "id": "31",
+      "title": "Monster In The Wall",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/iqdovcvbupfnse8hd77e1/Nightcore-Monster-In-The-Wall-Lyrics.opus?rlkey=0eipm4zegth1bn0n7uxkzpqod&st=mjlyub52",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Monster In The Wall"
+    },
+    {
+      "id": "30",
+      "title": "The King",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/bpuo4dcck42tu9u0wm8in/Nightcore-The-King-Lyrics.opus?rlkey=a09y1j66kpgry8h9qu5qv7vim&st=dc1u2dv3",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=The King"
+    },
+    {
+      "id": "29",
+      "title": "No Friends",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/goy0p91nnn4u6uxpy2apm/Nightcore-No-Friends-Cadmium-Lyrics.opus?rlkey=8hnn1q9lsdu1x9pyjdzfyc71o&st=rto0gjex",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=No Friends"
+    },
+    {
+      "id": "28",
+      "title": "Boys Feel Sad Too",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/g105nv19f2eoso268l03r/Nightcore-Boys-Feel-Sad-Too-Lyrics.opus?rlkey=8xp5c2dqhwbqinb2gxtx4rfk9&st=nly5gkor",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Boys Feel Sad Too"
+    },
+    {
+      "id": "27",
+      "title": "Two Faced",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/nowp7m7duhxfxc2v09fsn/Nightcore-Two-Faced-Lyrics.opus?rlkey=mpwexirbws81q49igouz2nk8h&st=sp3w49f1",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Two Faced"
+    },
+    {
+      "id": "26",
+      "title": "Just A Dream",
+      "artist": "Nightcore",
+      "audioSrc": "https://dl.dropboxusercontent.com/scl/fi/8povf4khkufnq5hv5iklq/Nightcore-Just-A-Dream.opus?rlkey=j59od33bjtpt9qzrtnls2mc9l&st=0miyeigq",
+      "coverArt": "https://placehold.co/100x100/9ca3af/ffffff?text=Just A Dream"
     },
     {
       "id": "25",
@@ -185,6 +241,7 @@
   ]
 
 }
+
 
 
 
